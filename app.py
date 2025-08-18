@@ -1,16 +1,18 @@
-const puppeteer = require('puppeteer');
-const express = require('express');
-const app = express();
+from flask import Flask, jsonify
+import requests
 
-app.get('/api/boutiques', async (req, res) => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto('https://vitrina.hstn.me/api/boutiques');
-  const content = await page.evaluate(() => {
-    return JSON.parse(document.body.innerText); // extract JSON
-  });
-  await browser.close();
-  res.json(content);
-});
+app = Flask(__name__)
 
-app.listen(3000, () => console.log('Proxy running on port 3000'));
+BOUTIQUE_API = "http://192.168.1.85:88/ouch/public/api/boutiques"
+
+@app.route("/boutiques")
+def boutiques():
+    try:
+        response = requests.get(BOUTIQUE_API, timeout=10)
+        data = response.json()
+        return jsonify(data)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
