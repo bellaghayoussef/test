@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-BOUTIQUE_API = "http://192.168.1.85:88/ouch/public/api/boutiques"
+BOUTIQUE_API = "https://vitrina.hstn.me/api/boutiques"
 
 @app.route("/boutiques")
 def boutiques():
