@@ -5,7 +5,7 @@ const app = express();
 app.get('/api/boutiques', async (req, res) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto('http://192.168.1.85:88/ouch/public/api/boutiques');
+  await page.goto('https://vitrina.hstn.me/api/boutiques');
   const content = await page.evaluate(() => {
     return JSON.parse(document.body.innerText); // extract JSON
   });
