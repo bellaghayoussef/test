@@ -18,7 +18,7 @@ def scrape(url):
         content = page.evaluate("() => document.body.innerText")
         
         browser.close()
-    
+    z
     try:
         # Return JSON directly
         return jsonify(eval(content))
@@ -26,8 +26,3 @@ def scrape(url):
         # If not JSON, return raw content
         return content
 
-
-if __name__ == "__main__":
-    # host=0.0.0.0 makes it accessible from network, debug=True for development
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
